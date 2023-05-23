@@ -1,0 +1,14 @@
+source_column,type
+user_id,biginteger
+app_session_id,uuid
+alert_type_id,biginteger
+user_uid,string
+alert_dttm,timestamp
+alert_weight,integer
+device_id,string
+event_id,string
+event_dttm,timestamp
+event_type_cd,string
+event_source_cd,string
+list_id,biginteger
+list_type_cd,string
