@@ -1,0 +1,20 @@
+expected_result,cases_name,source,user_id,client_uid,collector_time,client_list_type_cd,app_session_id,msg_id
+TRUE,Позитивный сценарий source=https://samokat.ru/samokat-app,https://samokat.ru/samokat-app,integer,uuid,1603410825,general_bl,uuid,uuid
+TRUE,Позитивный сценарий source=https://samokat.ru/frodo,https://samokat.ru/frodo,integer,uuid,1603410825,employee_general_bl,uuid,uuid
+FALSE,"Если source=https://samokat.ru/frodo И client_list_type_cd <> ‘EMPLOYEE_GENERAL_BL’, то сообщение игнорируется",https://samokat.ru/frodo,integer,uuid,1703410825,employee_general_bl,uuid,uuid
+FALSE,"Если source=https://samokat.ru/samokat-app И client_list_type_cd = employee_general_bl, то сообщение игнорируется",https://samokat.ru/samokat-app,integer,uuid,1703410825,employee_general_bl,uuid,uuid
+FALSE,"Если отсутсвует поле client_id, то сообщение игнорируется",https://samokat.ru/samokat-app,null,uuid,1703410825,general_bl,uuid,uuid
+FALSE,"Если client_id is not int, то сообщение игнорируется",https://samokat.ru/samokat-app,string,uuid,1703410825,general_bl,uuid,uuid
+FALSE,"Если отсутсвует поле source, то сообщение игнорируется",null,integer,uuid,1703410825,general_bl,uuid,uuid
+FALSE,"Если источник source не соответсвует, то сообщение игнорируется",string,integer,uuid,1703410825,general_bl,uuid,uuid
+FALSE,"Если cl.sys_is_deleted_flg = true, то алерт не отправляется ",https://samokat.ru/samokat-app,integer,uuid,1576001655,general_bl,uuid,uuid
+FALSE,"Если [Events].collector_time = tounixtimestamp([Client List].client_active_to_dttm), то алерт не отправляется",https://samokat.ru/frodo,integer,uuid,1703411065,general_bl,uuid,uuid
+FALSE,"Если clt.client_list_active_flg = false, то Алерт не отправляется. ",https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,uuid,uuid
+TRUE,when [Client List].client_list_type_cd = 'GENERAL_AL' then 2,https://samokat.ru/samokat-app,integer,uuid,1603411065,general_bl,uuid,uuid
+TRUE,when [Client List].client_list_type_cd = 'GENERAL_BL' then 1,https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,uuid,uuid
+TRUE,when [Client List].client_list_type_cd = 'BL_BY_ADDRESS' then 4,https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,uuid,uuid
+TRUE,when [Client List].client_list_type_cd = ‘AL_BY_ADDRESS' then 6,https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,uuid,uuid
+FALSE,"Если client_list_type_cd не из списка, то сообщение игнорируется",https://samokat.ru/samokat-app,integer,uuid,1503411065,general_bl,uuid,uuid
+TRUE,"Если такой алерт уже есть, то сообщение не отправляется (1 часть)",https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,2cc45e1e-922f-4105-99c2-bd0b66499e00,uuid
+FALSE,"Если такой алерт уже есть, то сообщение не отправляется",https://samokat.ru/samokat-app,integer,uuid,1703410825,general_bl,2cc45e1e-922f-4105-99c2-bd0b66499e00,uuid
+TRUE,Клиент принадлежит к нескольким client_list_type_cd - отправляется несколько сообщений,https://samokat.ru/samokat-app,integer,uuid,1676605750,general_bl,uuid,uuid
